@@ -30,19 +30,21 @@ app.get('/api/notes', (req, res) =>
 // Neet to set up POST API for /api/notes- Should receive a new note to save on the request body, addit to the db.json file, then return the new note to the client
 app.post('/api/notes', (req, res) => {
     const newNotes = req.body;
+    let data = fs.readFileSync('../Develop/db/db.json');
+    newNotes.routeName = newNotes.name.replace(/\s+/g, "").toLowerCase();
 
-    newNotes.routeName = newNotes.replace(/\s+/g, "").toLowerCase();
+    data.push(newNotes);
 
-    fs.appendFile(db, newNotes, (err, data) => {
+    fs.writeFile(data, newNotes, (err, data) => {
         if (err) throw err;
-        res.json.(newNotes);
     });
+    res.json(newNotes);
 })
 
 // HTML Routes
 // =====================================================
-app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, "public/notes.html")));
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, "public/index.html")));
+app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, "/public/notes.html")));
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, "/public/index.html")));
 
 // Server Listener
 // =====================================================
