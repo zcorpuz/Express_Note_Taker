@@ -1,7 +1,7 @@
 {
   "name": "note-taker",
   "version": "1.0.0",
-  "description": "",
+  "description": "helps students take notes dynamically",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
