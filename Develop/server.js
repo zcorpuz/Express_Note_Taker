@@ -49,11 +49,17 @@ app.delete('/api/notes/:id', (req, res) => {
     fs.readFile("./db/db.json", "utf-8", (err, data) => {
         if (err) throw err;
 
+        // Parse through notes array
         const jsonID = JSON.parse(data);
+        // Find the id in the array
         const idDelete = jsonID.find(newNote => newNote.id === req.params.id);
 
+        // Assign the index location of the id to a variable
         const idIndex = jsonID.indexOf(idDelete);
+        // Splice the object out of the array
         jsonID.splice(idIndex, 1);
+
+        // Write the new notes array
         fs.writeFile("./db/db.json", JSON.stringify(jsonID), (err, data) => {
             if (err) throw err;
             res.json(jsonID);
