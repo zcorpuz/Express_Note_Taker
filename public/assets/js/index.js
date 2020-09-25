@@ -50,7 +50,7 @@ const renderActiveNote = () => {
 };
 
 // Get the note data from the inputs, save it to the db and update the view
-const handleNoteSave = function() {
+const handleNoteSave = () => {
   const newNote = {
     title: $noteTitle.val(),
     text: $noteText.val()
@@ -63,7 +63,7 @@ const handleNoteSave = function() {
 };
 
 // Delete the clicked note
-const handleNoteDelete = function (event) {
+const handleNoteDelete = event => {
   // prevents the click listener for the list from being called when the button inside of it is clicked
   event.stopPropagation();
 
@@ -82,7 +82,7 @@ const handleNoteDelete = function (event) {
 };
 
 // Sets the activeNote and displays it
-const handleNoteView = function() {
+const handleNoteView = () => {
   activeNote = $(this).data();
   renderActiveNote();
 };
@@ -95,7 +95,7 @@ const handleNewNoteView = () => {
 
 // If a note's title or text are empty, hide the save button
 // Or else show it
-const handleRenderSaveBtn = function() {
+const handleRenderSaveBtn = () => {
   if (!$noteTitle.val().trim() || !$noteText.val().trim()) {
     $saveNoteBtn.hide();
   } else {
@@ -129,7 +129,7 @@ const renderNoteList = (notes) => {
     noteListItems.push(create$li("No saved Notes", false));
   }
 
-  notes.forEach((note) => {
+  notes.forEach(note => {
     const $li = create$li(note.title).data(note);
     noteListItems.push($li);
   });
